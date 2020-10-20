@@ -5,7 +5,9 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <link rel = "stylesheet" type = "text/css" href = "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel = "stylesheet" href = "/style.css?v=1">
+    
     <title>TestShop</title>
 </head>
 
@@ -36,20 +38,9 @@
     
     </div>
 
-    <?php
-    require 'scripts/connect.php';
-    $sql_select = "SELECT * FROM sales";
-    $result = mysql_query($sql_select);
-    $row = mysql_fetch_array($result);
-    do
-    {
-	    printf("<p>Товар: " .$row['first_name'] . " " .$row['last_name'] ."</p> 
-	<p><i>Контактные данные</i></p><p>E-mail: " .$row['email'] . "</p><p>Facebook: " .$row['facebook'] . "</p>---------<br/>"
-	);
-}
-while($row = mysql_fetch_array($result));
-         ?>
-
+    <script src = "https://code.jquery.com/jquery-3.5.1.min.js" integrity = "sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin = "anonymous"></script>
+    <script type = "text/javascript" src = "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+				
 </body>
 
 </html>

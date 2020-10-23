@@ -17,39 +17,39 @@
 	<body>
 		<section class = "one-time slider">
     		<div>
-				<img src = "https://i.pinimg.com/236x/b4/9c/12/b49c129f6f2600100836dd4f953aa78c.jpg">
+				<img src = "/images/4.jpg">
 				<p class = "banner">Баннер №1</p>
 			</div>
     		<div>
-				<img src = "http://www.sibinfo.su/files/Fck/image/babulya____sq373.jpg">
+				<img src = "/images/5.jpg">
 				<p class = "banner">Баннер №2</p>
 			</div>
     		<div>
-				<img src = "https://i.mycdn.me/i?r=AEF0PjOBfKSCKs0AX-NHBglGlECFsYToHAOXasBMnhLGqFjaGUC5bdaS2LfRWc32-UaPO0i1bS25atCdys1_w0Ps&amp;i=1&amp;fn=external_8">
+				<img src = "/images/6.jpeg">
 				<p class = "banner">Баннер №3</p>
 			</div>
     		<div>
-				<img src = "https://bnw-thmb.r.worldssl.net/ykATI6Ow7O4rAvjV14nfFuEGVWE=/fit-in/256x256/https://pp.vk.me/c636219/v636219967/bfac/dT9wQJji_qs.jpg">
+				<img src = "/images/4.jpg">
 				<p class = "banner">Баннер №4</p>
 			</div>
     		<div>
-				<img src = "https://pp.userapi.com/3oIWqLXVu1Cz2_UHLii1FUJXn-v5ZBFtm9SVKw/Xqvtj-ETP_0.jpg">
+				<img src = "/images/5.jpg">
 				<p class = "banner">Баннер №5</p>
 			</div>
     		<div>
-				<img src = "http://patstalom.com/uploads/images/c/5/3/4/30/f67bd48370.jpg">
+				<img src = "/images/6.jpeg">
 				<p class = "banner">Баннер №6</p>
 			</div>
     		<div>
-				<img src = "http://raskleika-spb.ru/wp-content/uploads/2017/01/naruzhnaya-reklama-300x198.jpg">
+				<img src = "/images/4.jpg">
 				<p class = "banner">Баннер №7</p>
 			</div>
     		<div>
-				<img src = "https://serpstat.com/img/blog/kak-sozdat-effektivnij-reklamnij-banner-sekreti-i-trendi/157225954136135849_59949419045.jpg">
+				<img src = "/images/5.jpg">
 				<p class = "banner">Баннер №8</p>
 			</div>
     		<div>
-				<img src = "https://img.artlebedev.ru/kovodstvo/idioteka/i/200/55914169-AC99-42E1-8DE8-C28F493DD6BA.jpg">
+				<img src = "/images/6.jpeg">
 				<p class = "banner">Баннер №9</p>
 			</div>
   		</section>		
@@ -138,8 +138,8 @@
 		<? while ($row = $result->fetch_object())
 		{ ?>
 			<div class = "feedback">
-				<p><?= $row->feedback ?></p>
-				<p class = "feed-name"><?= $row->name ?></p>
+				<p><?= htmlentities($row->feedback) ?></p>
+				<p class = "feed-name"><?= htmlentities($row->name) ?></p>
 			</div>
 		<? } ?>
 		</div>
@@ -174,8 +174,8 @@
 		</div>
 
   		<script src = "https://code.jquery.com/jquery-2.2.0.min.js" type = "text/javascript"></script>
-		<script src = "./slick/slick.js" type = "text/javascript" charset = "utf-8"></script>
-		<script src = "./lazyload/jquery.lazyload.js" type = "text/javascript" charset = "utf-8"></script>
+		<script src = "/slick/slick.js" type = "text/javascript" charset = "utf-8"></script>
+		<script src = "/lazyload/jquery.lazyload.js" type = "text/javascript" charset = "utf-8"></script>
 		<script src = "/script.js" type = "text/javascript"></script>
 		
 		<script type = "text/javascript">

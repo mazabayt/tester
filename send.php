@@ -13,35 +13,16 @@
     $link = mysqli_connect("localhost", "ashakirova_tshop", "QB*H0VDy3234234", "ashakirova_tshop");
 
     $nameReal = $link->real_escape_string($name);
-    $emalReal = $link->real_escape_string($email);
+    $emailReal = $link->real_escape_string($email);
     $telReal = $link->real_escape_string($tel);
+    $idReal = $link->real_escape_string($id);
 
-    $data = array("resp" => "Good", "error" => " ");
+    $sql = mysqli_query($link, "INSERT INTO `orders` (`name`, `email`, `tel`, `id_sale`) VALUE ('{$nameReal}', '{$emailReal}', '{$telReal}', '{$idReal}')");
+
+    $data = array("resp" => "Good", "error" => array());
     header('Content-Type: application/json');
 
-    if (!$link)
-    {
-        $data['resp'] = "Bad";
-        $data['error'] = mysqli_connect_error();
-        echo json_encode($data);
-        exit();
-    }
-
-    $res = $link->query("SELECT count(*) FROM orders");
-    $row = $res->fetch_row();
-    $idOrder = $row[0] + 1;
-
-    $sql = mysqli_query($link, "INSERT INTO `orders` (`ID`, `name`, `email`, `tel`, `id_sale`) VALUE ('{$idOrder}', '{$nameReal}', '{$emailReal}', '{$telReal}', '{$id}')");
-    if ($sql)
-    {
-        echo json_encode($data);
-    }
-    else
-    {
-        $data['resp'] = "Bad";
-        $data['error'] = mysqli_error($link);
-        echo json_encode($data);
-    }
+    $idOrder = $link->insert_id;
 
     $messageAdmin = '
         <!DOCTYPE html>
@@ -68,10 +49,10 @@
                                 Телефон клиента: '.htmlentities($tel).'
                             </span>
                             <span style = "display: inline-block; width: 100%;">
-                                E-mail клиента: <a href = "'.$email.'">'.htmlentities($email).'</a>
+                                E-mail клиента: <a href = "'.htmlentities($email).'">'.htmlentities($email).'</a>
                             </span>
                             <span style = "display: inline-block; width: 100%;">
-                                id товара: '.$id.'
+                                id товара: '.htmlentities($id).'
                             </span>
                         </td>
                     </tr>
@@ -121,8 +102,32 @@
         </html>
     ';
 
-    mail($email, $subjectPerson, $messagePerson, $headers);
-    mail($emailAdmin, $subjectAdmin, $messageAdmin, $headers);
+    if (!mail($email, $subjectPerson, $messagePerson, $headers))
+    {
+        $data['resp'] = "Bad";
+        $data['error'][] = error_get_last()['message'];
+    }
+
+    if (!mail($emailAdmin, $subjectAdmin, $messageAdmin, $headers))
+    {
+        $data['resp'] = "Bad";
+        $data['error'][] = error_get_last()['message'];
+    }
+
+    if (!$link)
+    {
+        $data['resp'] = "Bad";
+        $data['error'][] = mysqli_connect_error();
+        exit();
+    }
+
+    if (!$sql)
+    {
+        $data['resp'] = "Bad";
+        $data['error'][] = mysqli_error($link);
+    }
+
+    echo json_encode($data);
 
     $result->free();
     $mysqli->close(); 

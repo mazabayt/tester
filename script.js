@@ -1,15 +1,16 @@
 var modal = document.getElementById('mod-div');
 var modalGood = document.getElementById('mod-good');
+var modalBad = document.getElementById('mod-bad');
 var modalReview = document.getElementById('mod-review');
 
 $('.sale-buttons').on('click', function()
 {
-    var idSales = this.getAttribute("data-id");
-    $(modal).find(".price-id").val(idSales);
-    var nameSales = this.getAttribute("data-name");
-    document.getElementById("price-name").innerHTML = nameSales;
-    var priceSiles = this.getAttribute("data-price");
-    document.getElementById("price").innerHTML = priceSiles;
+    var idSales = this.getAttribute('data-id');
+    $(modal).find('.price-id').val(idSales);
+    var nameSales = this.getAttribute('data-name');
+    document.getElementById('price-name').innerHTML = nameSales;
+    var priceSiles = this.getAttribute('data-price');
+    document.getElementById('price').innerHTML = priceSiles;
     modal.style.display = "block";
 });
 
@@ -22,28 +23,30 @@ $('.close').on('click', function()
 {
     modal.style.display = "none";
     modalGood.style.display = "none";
+    modalBad.style.display = "none";
     modalReview.style.display = "none";
 });
 
 window.onclick = function(event)
 {
-    if (event.target == modal || event.target == modalGood || event.target == modalReview)
+    if (event.target == modal || event.target == modalGood || event.target == modalBad || event.target == modalReview)
     {
         modal.style.display = "none";
         modalGood.style.display = "none";
+        modalBad.style.display = "none";
         modalReview.style.display = "none";
     }
 }
 
 $(function() 
 {
-    $("img.lazy").lazyload(
+    $('img.lazy').lazyload(
     {
         effect: "fadeIn"
     });
 });
 
-$(modal).find(".sale-ok").on('click', function(e)
+$(modal).find('.sale-ok').on('click', function(e)
 {
     e.preventDefault();
     var form_data = $("#form-ok").serializeArray();
@@ -63,20 +66,29 @@ function formSend(data)
     console.log('data', data);
     $.ajax(
     {
-        url: '#',
+        url: '/send.php',
         type: 'POST',
+        dataType: 'json',
         data,
-        success: function(status)
+        success: function(result)
         {
-            console.log('status', status);
-            modal.style.display = "none";
-            modalGood.style.display = "block";
+            console.log('result', result);   
+            if (result['resp'] == 'Good')
+            {
+                modal.style.display = "none";
+                modalGood.style.display = "block";
+            }
+            else
+            {
+                modal.style.display = "none";
+                modalBad.style.display = "block";
+            }
         }
     });
 }
 
 // reviews
-var revDoc = $("#form-feed");
+var revDoc = $('#form-feed');
 var revButton = $(revDoc).find('.review-ok');
 
 $(revButton).on('click', function(e)
@@ -95,9 +107,40 @@ function formReview(data)
         url: '/result.php',
         type: 'POST',
         data,
-        success: function(status)
+        success: function(result)
         {
-            console.log('status', status);
+            console.log('result', result);
+            if (result['resp'] != 'Good')
+            {
+                modalGood.style.display = "block";
+            }
         }
     });
 }
+
+//new review
+$('#review-ok').on('click', function(e)
+{
+    var textReview = document.getElementById('text-review').value;
+    var reviewer = document.getElementById('person').value;
+
+    var div = $('<div/>',
+    {
+        'class': 'feedback'
+    });
+
+    $('<br/>').appendTo(div);
+    $('<p/>').html(textReview).appendTo(div);
+    $('<p/>', 
+    {
+        'class': 'feed-name'
+    }).html(reviewer).appendTo(div);
+
+    div.appendTo($('#reviews-block'));
+
+    document.getElementById('text-review').value = "";
+    document.getElementById('person').value = "";
+
+    e.preventDefault();
+    return false;
+});

@@ -15,42 +15,42 @@
 	</head>
 
 	<body>
-		<section class = "fade slider">
+		<section class = "one-time slider">
     		<div>
-				<p class = "banner">Баннер №1</p>
 				<img src = "https://i.pinimg.com/236x/b4/9c/12/b49c129f6f2600100836dd4f953aa78c.jpg">
+				<p class = "banner">Баннер №1</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №2</p>
 				<img src = "http://www.sibinfo.su/files/Fck/image/babulya____sq373.jpg">
+				<p class = "banner">Баннер №2</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №3</p>
 				<img src = "https://i.mycdn.me/i?r=AEF0PjOBfKSCKs0AX-NHBglGlECFsYToHAOXasBMnhLGqFjaGUC5bdaS2LfRWc32-UaPO0i1bS25atCdys1_w0Ps&amp;i=1&amp;fn=external_8">
+				<p class = "banner">Баннер №3</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №4</p>
 				<img src = "https://bnw-thmb.r.worldssl.net/ykATI6Ow7O4rAvjV14nfFuEGVWE=/fit-in/256x256/https://pp.vk.me/c636219/v636219967/bfac/dT9wQJji_qs.jpg">
+				<p class = "banner">Баннер №4</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №5</p>
 				<img src = "https://pp.userapi.com/3oIWqLXVu1Cz2_UHLii1FUJXn-v5ZBFtm9SVKw/Xqvtj-ETP_0.jpg">
+				<p class = "banner">Баннер №5</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №6</p>
 				<img src = "http://patstalom.com/uploads/images/c/5/3/4/30/f67bd48370.jpg">
+				<p class = "banner">Баннер №6</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №7</p>
 				<img src = "http://raskleika-spb.ru/wp-content/uploads/2017/01/naruzhnaya-reklama-300x198.jpg">
+				<p class = "banner">Баннер №7</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №8</p>
 				<img src = "https://serpstat.com/img/blog/kak-sozdat-effektivnij-reklamnij-banner-sekreti-i-trendi/157225954136135849_59949419045.jpg">
+				<p class = "banner">Баннер №8</p>
 			</div>
     		<div>
-				<p class = "banner">Баннер №9</p>
 				<img src = "https://img.artlebedev.ru/kovodstvo/idioteka/i/200/55914169-AC99-42E1-8DE8-C28F493DD6BA.jpg">
+				<p class = "banner">Баннер №9</p>
 			</div>
   		</section>		
 
@@ -86,6 +86,19 @@
 			</div>
 		</div>
 
+		<div id = "mod-bad" class = "modal">
+			<div class = "modal-content">
+				<div class = "modal-header">
+					<span class = "close">&times;</span>
+					<h3>Технические неполадки</h3>
+				</div>
+				<div class = "modal-body">
+					<p>Похоже, у нас что-то сломалось или происходят технические работы</p>
+					<p>Приносим свои извинения за возможные неудобства</p>
+				</div>
+			</div>
+		</div>
+
 		<?
 			$mysqli = new mysqli("localhost", "ashakirova_tshop", "QB*H0VDy3234234", "ashakirova_tshop");
 
@@ -106,7 +119,7 @@
 		{ ?>
 			<div class = "product">
 				<p><?= $row->name ?></p>
-				<img class = "lazy" data-original = "<?= $row->picture ?>" width = "150">
+				<img class = "lazy" data-original = "<?= $row->picture ?>" width = "150px">
 				<p><?= $row->about ?></p>
 				<a><div class = "sale-buttons" data-name = "<?= $row->name ?>" data-price = "<?= $row->price ?>" data-id = "<?= $row->ID ?>"><p class = "text-price">Купить за <?= $row->price ?> деняк</p></div></a>
 			</div>
@@ -121,7 +134,7 @@
 			$result = $mysqli->query($sql);
 		?>
 
-		<div class = "reviews">
+		<div class = "reviews" id = "reviews-block">
 		<? while ($row = $result->fetch_object())
 		{ ?>
 			<div class = "feedback">
@@ -139,8 +152,8 @@
 		<h2 class = "text-center">Оставьте свой отзыв</h2>
 		<form name = "form-review" class = "review-form" id = "form-feed">
 			<label for = "person">Представьтесь, пожалуйста </label><input type = "text" id = "person" name = "name-person" placeholder = "Антон Владимирович Козак"> <br>
-			<textarea  rows = "10" name = "feed" placeholder = "Поле для написания отзыва"></textarea> <br>
-			<input type = "submit" class = "review-ok" value = "Отправить">
+			<textarea  id = "text-review" rows = "10" name = "feed" placeholder = "Поле для написания отзыва"></textarea> <br>
+			<input type = "submit" class = "review-ok" id = "review-ok" value = "Отправить">
 		</form>
 
 		<div id = "mod-review" class = "modal">
@@ -166,15 +179,16 @@
 		<script src = "/script.js" type = "text/javascript"></script>
 		
 		<script type = "text/javascript">
-			$('.fade').slick(
+			$('.one-time').slick(
 			{
   				dots: true,
   				infinite: true,
   				speed: 500,
-  				fade: true,
+				fade: true,
+				slidesToShow: 1,
+				adaptiveHeight: true,
 				cssEase: 'linear',
-				autoplay: true,
-  				autoplaySpeed: 4000,
+				arrows: false,  
 			});
 		</script>
 	</body>

@@ -144,3 +144,19 @@ $('#review-ok').on('click', function(e)
     e.preventDefault();
     return false;
 });
+
+$(document).ready(
+    function()
+    {   
+        $('.one-time').slick(
+        {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            fade: true,
+            slidesToShow: 1,
+            cssEase: 'linear',
+            arrows: false,  
+        });
+    }
+);

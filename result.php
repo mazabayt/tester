@@ -1,37 +1,32 @@
 <?
     $text = $_REQUEST['feed'];
     $name = $_REQUEST['name-person'];
-    
-    if (isset($_POST['name-person']) && isset($_POST['feed']))
-    {    
-        $link = mysqli_connect("localhost", "ashakirova_tshop", "QB*H0VDy3234234", "ashakirova_tshop");
-        $data = array("resp" => "Good", "error" => " ");
-        header('Content-Type: application/json');
 
-        $textReal = $link->real_escape_string($text);
-        $nameReal = $link->real_escape_string($name);
+    $options = array(
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    );
+    $db = new PDO('mysql:host=localhost; dbname=ashakirova_tshop; charset=utf8', "ashakirova_tshop", "QB*H0VDy3234234",$options);
+    $data = array("resp" => "Good", "error" => " ");
+    header('Content-Type: application/json');
 
-        if (!$link)
-        {
-            $data['resp'] = "Bad";
-            $data['error'] = mysqli_connect_error();
-            echo json_encode($data);
-            exit();
-        }
-
-        $sql = mysqli_query($link, "INSERT INTO `reviews` (`feedback`, `name`) VALUE ('{$textReal}', '{$nameReal}')");
-        if ($sql)
-        {
-            echo json_encode($data);
-        }
-        else
-        {
-            $data['resp'] = "Bad";
-            $data['error'] = mysqli_error($link);
-            echo json_encode($data);
-        }
-
-        $result->free();
-        $mysqli->close(); 
+    if (!$db)
+    {
+        $data['resp'] = "Bad";
+        $data['error'] = "No Connection DB";
+        echo json_encode($data);
+        exit();
     }
+
+    $sql = $db->prepare("INSERT INTO reviews (feedback, name) VALUES (:text, :name)");
+    $sql->execute( array( ':text' => $text, ':name' => $name ) );
+
+    if (!$sql)
+    {
+        $data['resp'] = "Bad";
+        $data['error'] = $db->errorInfo();
+    }
+
+    echo json_encode($data);
+
+    $db = null; 
 ?> 

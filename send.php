@@ -10,19 +10,26 @@
     $headers = "Content-type: text/html; charset = \"utf-8\".\r\n";
     $headers .= "From: testshop@umgm.ru\r\n";
 
-    $link = mysqli_connect("localhost", "ashakirova_tshop", "QB*H0VDy3234234", "ashakirova_tshop");
+    $options = array(
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    );
+    $db = new PDO('mysql:host=localhost; dbname=ashakirova_tshop; charset=utf8', "ashakirova_tshop", "QB*H0VDy3234234", $options);
 
-    $nameReal = $link->real_escape_string($name);
-    $emailReal = $link->real_escape_string($email);
-    $telReal = $link->real_escape_string($tel);
-    $idReal = $link->real_escape_string($id);
+    if (!$db)
+    {
+        $data['resp'] = "Bad";
+        $data['error'][] = "No Connection DB";
+        echo json_encode($data);
+        exit();
+    }
 
-    $sql = mysqli_query($link, "INSERT INTO `orders` (`name`, `email`, `tel`, `id_sale`) VALUE ('{$nameReal}', '{$emailReal}', '{$telReal}', '{$idReal}')");
+    $sql = $db->prepare("INSERT INTO orders (name, email, tel, id_sale) VALUES (:name, :email, :tel, :id)");
+    $sql->execute( array( ':name' => $name, ':email' => $email, ':tel' => $tel, ':id' => $id ) );
 
     $data = array("resp" => "Good", "error" => array());
     header('Content-Type: application/json');
 
-    $idOrder = $link->insert_id;
+    $idOrder = $db->insert_id;
 
     $messageAdmin = '
         <!DOCTYPE html>
@@ -114,22 +121,14 @@
         $data['error'][] = error_get_last()['message'];
     }
 
-    if (!$link)
-    {
-        $data['resp'] = "Bad";
-        $data['error'][] = mysqli_connect_error();
-        exit();
-    }
-
     if (!$sql)
     {
         $data['resp'] = "Bad";
-        $data['error'][] = mysqli_error($link);
+        $data['error'][] = $db->errorInfo();
     }
 
     echo json_encode($data);
 
-    $result->free();
-    $mysqli->close(); 
+    $db = null; 
 
 ?>

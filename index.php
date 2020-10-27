@@ -6,8 +6,6 @@
 				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 			);
 			$db = new PDO('mysql:host=localhost; dbname=ashakirova_tshop; charset=utf8', "ashakirova_tshop", "QB*H0VDy3234234", $options);
-		
-			echo $session['foo']; //bar
 		?>
 
 		<div id = "mod-div" class = "modal">
@@ -56,15 +54,29 @@
 		</div>
 
 		<div class = "sales">
-			<? foreach($db->query('SELECT * FROM sales ORDER BY price DESC') as $row) 
-			{ ?>
-				<div class = "product">
-					<p><?= $row['name'] ?></p>
-					<img class = "lazy" data-original = "<?= $row['picture'] ?>" width = "150px">
-					<p><?= $row['about'] ?></p>
-					<div class = "sale-buttons" data-name = "<?= $row['name'] ?>" data-price = "<?= $row['price'] ?>" data-id = "<?= $row['ID'] ?>"><p class = "text-price">Купить за <?= $row['price'] ?> деняк</p></div>
-				</div>
-			<? } ?>
+			<? 
+				if (CModule::IncludeModule("iblock"))
+				{
+					$res = CIBlockElement::GetList(
+						Array("PROPERTY_PRICE" => "DESC"),
+						Array("IBLOCK_ID" => 1),
+						false,
+						false,
+						Array("ID", "NAME", "PROPERTY_PRICE", "DETAIL_PICTURE", "DETAIL_TEXT")
+					);
+					while ($row = $res->GetNext())
+					{ 
+					?>
+						<div class = "product">
+							<p><?= $row["NAME"] ?></p>
+							<img class = "lazy" data-original = "<?= CFile::GetPath($row["DETAIL_PICTURE"]) ?>" width = "150px">
+							<p><?= $row["DETAIL_TEXT"] ?></p>
+							<div class = "sale-buttons" data-name = "<?= $row["NAME"] ?>" data-price = "<?= $row["PROPERTY_PRICE_VALUE"] ?>" data-id = "<?= $row["ID"] ?>"><p class = "text-price">Купить за <?= $row["PROPERTY_PRICE_VALUE"] ?> деняк</p></div>
+						</div>
+					<?
+					} 
+				} 
+			?>
 		</div>
 
 		<h2 class = "text-center">Ваши отзывы</h2>

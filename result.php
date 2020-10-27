@@ -1,4 +1,6 @@
 <?
+    session_start();
+    
     $text = $_REQUEST['feed'];
     $name = $_REQUEST['name-person'];
 
@@ -19,6 +21,7 @@
 
     $sql = $db->prepare("INSERT INTO reviews (feedback, name) VALUES (:text, :name)");
     $sql->execute( array( ':text' => $text, ':name' => $name ) );
+    $_SESSION['status'] = "visited";
 
     if (!$sql)
     {

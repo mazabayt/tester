@@ -1,7 +1,54 @@
+document.addEventListener('DOMContentLoaded', function(event)
+{
+    var onTransitionEnd = function()
+    {
+        var body = document.body;
+        var page = document.getElementById('page-wrapper');
+
+        body.classList.remove('animating');
+        body.classList.remove('left');
+        body.classList.remove('right');
+        body.classList.toggle('menu-visible');
+
+        page.transitionend = null;
+        page.webkitTransitionEnd = null;
+        page.otransitionend = null;
+        page.MSTransitionEnd = null;
+    };
+
+    document.getElementById('cool-menu-toggle').addEventListener('click', function(e)
+    {
+        e.preventDefault();
+
+        var body = document.body;
+        var page = document.getElementById('page-wrapper');      
+        
+        body.classList.add('animating');
+        body.classList.add(body.classList.contains('menu-visible') ? 'right' : 'left');
+
+        if (page.addEventListener)
+        {
+            page.addEventListener('transitionend', onTransitionEnd, false);
+            page.addEventListener('webkitTransitionEnd', onTransitionEnd, false);
+            page.addEventListener('otransitionend', onTransitionEnd, false);
+            page.addEventListener('MSTransitionEnd', onTransitionEnd, false);
+        }
+        else
+        {
+            page.attachEvent('transitionend', onTransitionEnd);
+            page.attachEvent('webkitTransitionEnd', onTransitionEnd);
+            page.attachEvent('otransitionend', onTransitionEnd);
+            page.attachEvent('MSTransitionEnd', onTransitionEnd);
+        }
+    });
+});
+
 var modal = document.getElementById('mod-div');
 var modalGood = document.getElementById('mod-good');
 var modalBad = document.getElementById('mod-bad');
 var modalReview = document.getElementById('mod-review');
+
+var reviewsHidder = document.getElementById('reviews-hidder');
 
 $('.sale-buttons').on('click', function()
 {
@@ -96,7 +143,6 @@ $(revButton).on('click', function(e)
     e.preventDefault();
     var form_data = $(revDoc).serializeArray();
     formReview(form_data);
-    console.log('form_data', form_data);
 });
 
 function formReview(data)
@@ -110,9 +156,14 @@ function formReview(data)
         success: function(result)
         {
             console.log('result', result);
-            if (result['resp'] != 'Good')
+            if (result['resp'] == 'Good')
             {
-                modalGood.style.display = "block";
+                reviewsHidder.style.display = "none";
+                modalReview.style.display = "block";
+            }
+            else
+            {
+                modalBad.style.display = "block";
             }
         }
     });

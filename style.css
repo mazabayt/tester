@@ -114,13 +114,21 @@ html, body
 {
 	width: 250px;
 	height: 80px;
-	border-radius: 5px;
-	border: 1px solid black;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	display: block;
-	background-color: greenyellow;
 	text-align: center;
+	background-color: #d3d3e7;
+	border: 2px solid black;
+	border-radius: 0.6em;
+
+	color: Black;
+	background-image: -webkit-linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+	background-image: linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+	background-position: 100%;
+	background-size: 400%;
+	-webkit-transition: background 0.75s ease-in-out;
+	transition: background 0.75s ease-in-out;
 }
 
 .sale-ok,
@@ -137,11 +145,15 @@ html, body
 
 .sale-buttons:hover,
 .sale-ok:hover,
-.review-ok:hover
+.review-ok:hover,
+.sale-buttons:focus,
+.sale-ok:focus,
+.review-ok:focus
 {
-	background-color: green;
-	border: 2px solid black;
-	cursor: pointer;
+	color: black;
+	outline: 0;
+	background-position: 0;
+	border-color: red;
 }
 
 .sale-buttons:active,
@@ -153,7 +165,7 @@ html, body
 	cursor: pointer;
 }
 
-a
+.github
 {
 	text-decoration: inherit;
 	color: inherit;
@@ -311,6 +323,112 @@ a
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
+}
+
+/* Меню */
+
+#page-wrapper
+{
+	position: relative;
+	z-index: 20;
+	padding: 10px 20px;
+	background: #fff;
+	height: 100%;
+}
+
+#cool-menu-toggle
+{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 10px;
+	border: 1px solid #333;
+	border-radius: 3px;
+}
+
+#cool-menu
+{
+	display: none;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 190px;
+	padding: 15px 25px;
+	margin: 0;
+	list-style: none;
+	background: #333;
+	z-index: 10;
+}
+
+#cool-menu a
+{
+	display: block;
+	color: #fff;
+	padding: 15px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Анимация меню */
+
+#page-wrapper,
+#cool-menu
+{
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+}
+
+.animating #cool-menu
+{
+	opacity: 1;
+}
+
+.menu-visible #cool-menu
+{
+	display: block;
+}
+
+.animating #page-wrapper
+{
+	transition: transform 0.15s ease-in-out;
+	-webkit-transition: -webkit-transform 0.15s ease-in-out;
+}
+
+.animating.left #page-wrapper
+{
+	transform: translate3d(-240px, 0, 0);
+	-webkit-transform: translate3d(-240px, 0, 0);
+}
+
+.animating.right #page-wrapper
+{
+	transform: translate3d(240px, 0, 0);
+	-webkit-transform: translate3d(240px, 0, 0);
+}
+
+.animating.right #cool-menu
+{
+	opacity: 0;
+}
+
+.menu-visible #page-wrapper
+{
+	right: 240px;
+}
+
+/* Отображение меню */
+
+#cool-menu-toggle
+{
+	display: none;
+}
+
+@media only screen and (max-width: 991px)
+{
+	#cool-menu-toggle
+	{
+		display: block;
+	}
 }
 
 @media (max-width: 1199px)

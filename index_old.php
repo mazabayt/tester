@@ -13,13 +13,13 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
+  <head>
 		<title>TestShop</title>
 		<meta charset = "UTF-8">
 		<meta name = "viewport" content = "width = device-width, initial-scale = 1">
-  		<link rel = "stylesheet" type = "text/css" href = "./slick/slick.css">
-  		<link rel = "stylesheet" type = "text/css" href = "./slick/slick-theme.css">
-  		<link rel = "stylesheet" href = "/style.css?v=1">
+  	<link rel = "stylesheet" type = "text/css" href = "./slick/slick.css">
+  	<link rel = "stylesheet" type = "text/css" href = "./slick/slick-theme.css">
+  	<link rel = "stylesheet" href = "/style.css?v=1">
 	</head>
 
 	<body>
@@ -106,15 +106,15 @@
 		?>
 
 		<div class = "sales">
-		<? foreach($db->query('SELECT * FROM sales ORDER BY price DESC') as $row) 
-		{ ?>
-			<div class = "product">
-				<p><?= $row['name'] ?></p>
-				<img class = "lazy" data-original = "<?= $row['picture'] ?>" width = "150px">
-				<p><?= $row['about'] ?></p>
-				<div class = "sale-buttons" data-name = "<?= $row['name'] ?>" data-price = "<?= $row['price'] ?>" data-id = "<?= $row['ID'] ?>"><p class = "text-price">Купить за <?= $row['price'] ?> деняк</p></div>
-			</div>
-		<? } ?>
+      <? foreach($db->query('SELECT * FROM sales ORDER BY price DESC') as $row) 
+		  { ?>
+			  <div class = "product">
+  				<p><?= $row['name'] ?></p>
+	  			<img class = "lazy" data-original = "<?= $row['picture'] ?>" width = "150px">
+		  		<p><?= $row['about'] ?></p>
+			  	<div class = "sale-buttons" data-name = "<?= $row['name'] ?>" data-price = "<?= $row['price'] ?>" data-id = "<?= $row['ID'] ?>"><p class = "text-price">Купить за <?= $row['price'] ?> деняк</p></div>
+			  </div>
+		  <? } ?>
 		</div>
 
 		<h2 class = "text-center">Ваши отзывы</h2>

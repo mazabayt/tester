@@ -5,7 +5,6 @@
 		$_SESSION['status'] = "not visited";
 	}
 	
-
 	ini_set('error_reporting', E_ALL);
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -106,43 +105,54 @@
 		?>
 
 		<div class = "sales">
-      <? foreach($db->query('SELECT * FROM sales ORDER BY price DESC') as $row) 
-		  { ?>
-			  <div class = "product">
-  				<p><?= $row['name'] ?></p>
-	  			<img class = "lazy" data-original = "<?= $row['picture'] ?>" width = "150px">
-		  		<p><?= $row['about'] ?></p>
-			  	<div class = "sale-buttons" data-name = "<?= $row['name'] ?>" data-price = "<?= $row['price'] ?>" data-id = "<?= $row['ID'] ?>"><p class = "text-price">Купить за <?= $row['price'] ?> деняк</p></div>
-			  </div>
-		  <? } ?>
+			<? 
+				foreach($db->query('SELECT * FROM sales ORDER BY price DESC') as $row) 
+		  		{ 
+					?>
+				  		<div class = "product">
+  							<p><?= $row['name'] ?></p>
+	  						<img class = "lazy" data-original = "<?= $row['picture'] ?>" width = "150px">
+		  					<p><?= $row['about'] ?></p>
+			  				<div class = "sale-buttons" data-name = "<?= $row['name'] ?>" data-price = "<?= $row['price'] ?>" data-id = "<?= $row['ID'] ?>"><p class = "text-price">Купить за <?= $row['price'] ?> деняк</p></div>
+				  		</div>
+					  <? 
+				} 
+			?>
 		</div>
 
 		<h2 class = "text-center">Ваши отзывы</h2>
 		<div class = "reviews" id = "reviews-block">
-		<? foreach($db->query('SELECT * FROM reviews') as $row)
-		{ ?>
-			<div class = "feedback">
-				<p><?= htmlentities($row['feedback']) ?></p>
-				<p class = "feed-name"><?= htmlentities($row['name']) ?></p>
-			</div>
-		<? } ?>
+			<? 
+				foreach($db->query('SELECT * FROM reviews') as $row)
+				{
+					?>
+						<div class = "feedback">
+							<p><?= htmlentities($row['feedback']) ?></p>
+							<p class = "feed-name"><?= htmlentities($row['name']) ?></p>
+						</div>
+					<? 
+				} 
+			?>
 		</div>
 
 		<?
 			$db = null;
 			if ($_SESSION['status'] !== "visited")
-			{ ?> 
-				<div id = "reviews-hidder">
-					<h2 class = "text-center">Оставьте свой отзыв</h2>
-					<form name = "form-review" class = "review-form" id = "form-feed">
-						<div class = "review-div">
-							<label for = "person">Представьтесь, пожалуйста </label><input type = "text" id = "person" name = "name-person" placeholder = "Антон Владимирович Козак"> <br>
-							<textarea  id = "text-review" rows = "10" name = "feed" placeholder = " Поле для написания отзыва"></textarea> <br>
-							<input type = "submit" class = "review-ok" id = "review-ok" value = "Отправить">
-						</div>
-					</form>
-				</div>
-			<? } ?>
+			{ 
+				?> 
+					<div id = "reviews-hidder">
+						<h2 class = "text-center">Оставьте свой отзыв</h2>
+						<form name = "form-review" class = "review-form" id = "form-feed">
+							<div class = "review-div">
+								<label for = "person">Представьтесь, пожалуйста </label><input type = "text" id = "person" name = "name-person" placeholder = "Антон Владимирович Козак"> <br>
+								<textarea  id = "text-review" rows = "10" name = "feed" placeholder = " Поле для написания отзыва"></textarea> <br>
+								<input type = "submit" class = "review-ok" id = "review-ok" value = "Отправить">
+							</div>
+						</form>
+					</div>
+				<? 
+			} 
+		?>
 
 		<div id = "mod-review" class = "modal">
 			<div class = "modal-content">

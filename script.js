@@ -93,6 +93,8 @@ $(function()
     });
 });
 
+//send
+
 $(modal).find('.sale-ok').on('click', function(e)
 {
     e.preventDefault();
@@ -120,7 +122,7 @@ function formSend(data)
         success: function(result)
         {
             console.log('result', result);   
-            if (result['resp'] == 'Good')
+            if (result['resp'] != 'Bad')
             {
                 modal.style.display = "none";
                 modalGood.style.display = "block";
@@ -135,6 +137,7 @@ function formSend(data)
 }
 
 // reviews
+
 var revDoc = $('#form-feed');
 var revButton = $(revDoc).find('.review-ok');
 
@@ -156,7 +159,7 @@ function formReview(data)
         success: function(result)
         {
             console.log('result', result);
-            if (result['resp'] == 'Good')
+            if (result['resp'] != 'Bad')
             {
                 reviewsHidder.style.display = "none";
                 modalReview.style.display = "block";
@@ -170,6 +173,7 @@ function formReview(data)
 }
 
 //new review
+
 $('#review-ok').on('click', function(e)
 {
     var textReview = document.getElementById('text-review').value;

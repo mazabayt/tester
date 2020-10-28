@@ -336,6 +336,14 @@ html, body
 	height: 100%;
 }
 
+.bx-newslist
+{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+}
+
 #cool-menu-toggle
 {
 	position: absolute;

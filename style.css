@@ -431,6 +431,8 @@ html, body
 	}
 }
 
+/* Адаптивность */
+
 @media (max-width: 1199px)
 {
 	.sales

@@ -93,7 +93,7 @@ $(function()
     });
 });
 
-//send
+// Кнопка покупки
 
 $(modal).find('.sale-ok').on('click', function(e)
 {
@@ -136,7 +136,7 @@ function formSend(data)
     });
 }
 
-// reviews
+// Кнопка оставить отзыв
 
 var revDoc = $('#form-feed');
 var revButton = $(revDoc).find('.review-ok');
@@ -172,7 +172,7 @@ function formReview(data)
     });
 }
 
-//new review
+// Добавление нового отзыва
 
 $('#review-ok').on('click', function(e)
 {
@@ -199,6 +199,8 @@ $('#review-ok').on('click', function(e)
     e.preventDefault();
     return false;
 });
+
+// Слик-слайдер
 
 $(document).ready(
     function()

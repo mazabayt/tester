@@ -15,9 +15,7 @@
     $headers = "Content-type: text/html; charset = \"utf-8\".\r\n";
     $headers .= "From: testshop@umgm.ru\r\n";
 
-
     CModule::IncludeModule("iblock");
-
     $res = new CIBlockElement;
 
     $orderArray = Array(

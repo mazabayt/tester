@@ -52,7 +52,7 @@
 		</div>
 	</div>
 </div>
-		
+
 <?
 	$APPLICATION->IncludeComponent("bitrix:news.list", "my_products", Array(
 		"IBLOCK_TYPE" 						=> "product",			// Тип информационного блока (используется только для проверки)
@@ -119,7 +119,7 @@
 ?>
 
 <div class = "sales">
-	<? 
+	<?
 		if (CModule::IncludeModule("iblock"))
 		{
 			$res = CIBlockElement::GetList(
@@ -130,40 +130,40 @@
 				Array("ID", "NAME", "PROPERTY_PRICE", "DETAIL_PICTURE", "DETAIL_TEXT")
 			);
 			while ($row = $res->GetNext())
-			{ 
+			{
 				?>
 					<div class = "product">
 						<p><?= $row["NAME"] ?></p>
-						<img class = "lazy" data-original = "<?= CFile::GetPath($row["DETAIL_PICTURE"]) ?>" width = "150px">
+						<img class = "lazy" data-original = "<?= CFile::GetPath($row["DETAIL_PICTURE"]) ?>">
 						<p><?= $row["DETAIL_TEXT"] ?></p>
 						<div class = "sale-buttons" data-name = "<?= $row["NAME"] ?>" data-price = "<?= $row["PROPERTY_PRICE_VALUE"] ?>" data-id = "<?= $row["ID"] ?>"><p class = "text-price">Купить за <?= $row["PROPERTY_PRICE_VALUE"] ?> деняк</p></div>
 					</div>
 				<?
-			} 
-		} 
+			}
+		}
 	?>
 </div>
 
 <h2 class = "text-center">Ваши отзывы</h2>
 <div class = "reviews" id = "reviews-block">
-	<? 
+	<?
 		foreach($db->query('SELECT * FROM reviews') as $row)
-		{ 
+		{
 			?>
 				<div class = "feedback">
 					<p><?= htmlentities($row['feedback']) ?></p>
 					<p class = "feed-name"><?= htmlentities($row['name']) ?></p>
 				</div>
-			<? 
-		} 
+			<?
+		}
 	?>
 </div>
 
 <?
 	$db = null;
 	if ($_SESSION['status'] !== "visited")
-	{ 
-		?> 
+	{
+		?>
 			<div id = "reviews-hidder">
 				<h2 class = "text-center">Оставьте свой отзыв</h2>
 				<form name = "form-review" class = "review-form" id = "form-feed">
@@ -174,8 +174,8 @@
 					</div>
 				</form>
 			</div>
-		<? 
-	} 
+		<?
+	}
 ?>
 
 <div id = "mod-review" class = "modal">
@@ -190,6 +190,6 @@
 	</div>
 </div>
 
-<? 
+<?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>

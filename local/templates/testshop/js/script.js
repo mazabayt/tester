@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function(event)
         e.preventDefault();
 
         var body = document.body;
-        var page = document.getElementById('page-wrapper');      
-        
+        var page = document.getElementById('page-wrapper');
+
         body.classList.add('animating');
         body.classList.add(body.classList.contains('menu-visible') ? 'right' : 'left');
 
@@ -85,7 +85,7 @@ window.onclick = function(event)
     }
 }
 
-$(function() 
+$(function()
 {
     $('img.lazy').lazyload(
     {
@@ -111,7 +111,7 @@ $(modal).find('.sale-ok').on('click', function(e)
 });
 
 function formSend(data)
-{      
+{
     console.log('data', data);
     $.ajax(
     {
@@ -121,7 +121,7 @@ function formSend(data)
         data,
         success: function(result)
         {
-            console.log('result', result);   
+            console.log('result', result);
             if (result['resp'] != 'Bad')
             {
                 modal.style.display = "none";
@@ -149,7 +149,7 @@ $(revButton).on('click', function(e)
 });
 
 function formReview(data)
-{      
+{
     console.log('data', data);
     $.ajax(
     {
@@ -186,7 +186,7 @@ $('#review-ok').on('click', function(e)
 
     $('<br/>').appendTo(div);
     $('<p/>').html(textReview).appendTo(div);
-    $('<p/>', 
+    $('<p/>',
     {
         'class': 'feed-name'
     }).html(reviewer).appendTo(div);
@@ -204,7 +204,7 @@ $('#review-ok').on('click', function(e)
 
 $(document).ready(
     function()
-    {   
+    {
         $('.one-time').slick(
         {
             dots: true,
@@ -213,7 +213,7 @@ $(document).ready(
             fade: true,
             slidesToShow: 1,
             cssEase: 'linear',
-            arrows: false,  
+            arrows: false,
         });
     }
 );

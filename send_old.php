@@ -129,6 +129,5 @@
 
     echo json_encode($data);
 
-    $db = null; 
-
+    $db = null;
 ?>

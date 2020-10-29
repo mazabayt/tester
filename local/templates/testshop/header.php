@@ -7,7 +7,7 @@
 	//ini_set('error_reporting', E_ALL);
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
-	
+
 	session_start();
 	if (!isset($_SESSION['status']))
 	{
@@ -20,21 +20,21 @@
 	<head>
 		<title><?= $APPLICATION->ShowTitle(); ?></title>
 		<?
-			$APPLICATION->ShowHead(); 
+			$APPLICATION->ShowHead();
 
 			use Bitrix\Main\Page\Asset;
 
 			Asset::getInstance()->addString('<meta name = "viewport" content = "width = device-width, initial-scale = 1">');
 			Asset::getInstance()->addString('<meta charset = "UTF-8">');
-			 
-			Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/slick.css'); 
-		 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/slick-theme.css'); 
-		 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/style.css'); 
+
+			Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/slick.css');
+		 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/slick-theme.css');
+		 	Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/style.css');
 
 			Asset::getInstance()->addJs('https://code.jquery.com/jquery-3.5.1.js');
 			Asset::getInstance()->addJs('https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
 			Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/jquery.lazyload.js');
-			Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/script.js'); 
+			Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/script.js');
 		?>
 	</head>
 

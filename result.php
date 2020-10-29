@@ -1,6 +1,6 @@
 <?
     session_start();
-    
+
     $text = $_REQUEST['feed'];
     $name = $_REQUEST['name-person'];
 
@@ -31,5 +31,5 @@
 
     echo json_encode($data);
 
-    $db = null; 
-?> 
+    $db = null;
+?>

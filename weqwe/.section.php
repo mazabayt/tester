@@ -1,3 +1,3 @@
 <?
-$sSectionName="weqwe";
+    $sSectionName = "weqwe";
 ?>

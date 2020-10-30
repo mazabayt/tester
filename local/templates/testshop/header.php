@@ -39,7 +39,7 @@
 	</head>
 
 	<body>
-	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
+		<div id = "panel"><? $APPLICATION->ShowPanel(); ?></div>
 
 		<ul id = "cool-menu">
 			<li><a href = "/">Главная</a></li>

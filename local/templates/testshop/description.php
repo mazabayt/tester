@@ -1,8 +1,8 @@
 <?
-$arTemplate = array (
-  'NAME' => 'тестовый шабллон',
-  'DESCRIPTION' => '',
-  'SORT' => '',
-  'TYPE' => '',
-);
+  $arTemplate = array(
+    'NAME'        => 'тестовый шабллон',
+    'DESCRIPTION' => '',
+    'SORT'        => '',
+    'TYPE'        => '',
+    );
 ?>
